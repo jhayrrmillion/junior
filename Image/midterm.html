@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Jhayr Million</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- SHARED NEON THEME --- */
+        :root {
+            --bg-color: #050505;
+            --neon-cyan: #00f3ff;
+            --neon-pink: #bc13fe;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #fff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            padding-bottom: 100px;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(188, 19, 254, 0.05) 0%, rgba(0, 0, 0, 0) 50%),
+                linear-gradient(0deg, rgba(0,0,0,1) 0%, #1a1a2e 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- WELCOME SECTION --- */
+        #welcome {
+            height: 80vh; /* Takes up most of the screen */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: radial-gradient(circle at center, rgba(0, 243, 255, 0.05) 0%, transparent 70%);
+        }
+
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        h2.note {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        p.note {
+            font-size: 1.2rem;
+            color: var(--neon-pink);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- GALLERY SECTION --- */
+        .gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 20px 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Base Box Style (Glassmorphism) */
+        .box, .box1, .box2 {
+            width: 300px;
+            height: 200px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: #ccc;
+            transition: 0.4s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            text-decoration: none;
+            text-align: center;
+        }
+
+        /* Hover Effects - Specific Colors for Box Types */
+        .box:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--neon-cyan); 
+            box-shadow: 0 0 20px var(--neon-cyan); 
+            color: #fff;
+        }
+        
+        .box1:hover { 
+            transform: translateY(-10px); 
+            border-color: var(--neon-pink); 
+            box-shadow: 0 0 20px var(--neon-pink); 
+            color: #fff;
+        }
+        
+        .box2:hover { 
+            transform: translateY(-10px); 
+            border-color: #fff; 
+            box-shadow: 0 0 20px #fff; 
+            color: #fff;
+        }
+
+        /* Animation Class */
+        .flip-scale-up-hor {
+            animation: flip-scale-up-hor 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+        }
+
+        @keyframes flip-scale-up-hor {
+            0% { transform: scale(1) rotateX(0); }
+            50% { transform: scale(2.5) rotateX(-90deg); opacity: 0; }
+            100% { transform: scale(1) rotateX(-360deg); opacity: 1; }
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px rgba(0, 243, 255, 0.5); }
+            to { text-shadow: 0 0 25px rgba(0, 243, 255, 0.9), 0 0 10px var(--neon-pink); }
+        }
+
+        /* --- SIDEBAR NAVIGATION --- */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 260px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            border-left: 1px solid var(--neon-cyan);
+            box-shadow: -5px 0 20px rgba(0, 243, 255, 0.15);
+            z-index: 2000;
+            padding-top: 80px;
+            display: flex;
+            flex-direction: column;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .sidebar.active { right: 0; }
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1em;
+            padding: 15px 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
+        }
+        .sidebar a i { font-size: 1.3em; color: var(--neon-pink); transition: 0.3s; }
+        .sidebar a:hover { background: rgba(188, 19, 254, 0.1); padding-left: 35px; color: var(--neon-cyan); }
+        .sidebar a:hover i { color: var(--neon-cyan); transform: scale(1.2); }
+
+        /* Toggle Button */
+        .menu-toggle-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 60px;
+            height: 60px;
+            background: #000;
+            border: 2px solid var(--neon-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px var(--neon-pink);
+            z-index: 2001;
+            transition: 0.3s;
+        }
+        .menu-toggle-btn:hover { transform: scale(1.1) rotate(180deg); background: rgba(188, 19, 254, 0.2); border-color: var(--neon-cyan); box-shadow: 0 0 20px var(--neon-cyan); }
+        .menu-toggle-btn i { font-size: 28px; color: #fff; }
+
+        .overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); backdrop-filter: blur(2px);
+            z-index: 1999; opacity: 0; visibility: hidden; transition: 0.3s;
+        }
+        .overlay.active { opacity: 1; visibility: visible; }
+
+        /* Responsive */
+        @media screen and (max-width: 768px) {
+            .title { font-size: 2.2rem; }
+            h2.note { font-size: 1.5rem; }
+            p.note { font-size: 0.9rem; }
+            .box, .box1, .box2 { width: 100%; }
+            .menu-toggle-btn { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+            .menu-toggle-btn i { font-size: 24px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- WELCOME SECTION -->
+    <section id="welcome">
+        <h1 class="title">Welcome to my page</h1>
+        <h2 class="note">I am Jhayr Million</h2>
+        <p class="note">CS211 Application Development and Emerging Technology</p>
+    </section>
+
+    <!-- GALLERY SECTION 1 -->
+    <section class="gallery">
+        <div class="box" onclick="location.href='lesson.html'">
+            <i class='bx bx-code-alt' style="font-size: 3rem; margin-bottom: 10px;"></i>
+            <span>Lessons</span>
+        </div>
+        <div class="box1 flip-scale-up-hor" onclick="location.href='resume.html'">
+            <i class='bx bx-id-card' style="font-size: 3rem; margin-bottom: 10px;"></i>
+            <span>Resume</span>
+        </div>
+        <div class="box2" onclick="location.href='#'">
+            <i class='bx bx-envelope' style="font-size: 3rem; margin-bottom: 10px;"></i>
+            <span>Contact</span>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION 2 -->
+    <section class="gallery">
+        <div class="box">
+            <span>Project 1</span>
+        </div>
+        <div class="box1">
+            <span>Project 2</span>
+        </div>
+        <div class="box2">
+            <span>Project 3</span>
+        </div>
+    </section>
+
+    <!-- SIDEBAR NAVIGATION & OVERLAY -->
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <div class="sidebar" id="sidebar">
+        <a href="home.html"><i class='bx bx-home'></i> Home</a>
+        <a href="lesson.html"><i class='bx bx-search'></i> Lesson</a>
+        <a href="resume.html"><i class='bx bx-bell'></i> Resume</a>
+        <a href="Activity.html"><i class='bx bx-bell'></i> Activity Image</a>
+        <a href="Activity2.html"><i class='bx bx-heart'></i> Media</a>
+        <a href="midterm.html"><i class='bx bx-user'></i> Midterm</a>
+    </div>
+
+    <!-- TOGGLE BUTTON -->
+    <div class="menu-toggle-btn" onclick="toggleSidebar()">
+        <i class='bx bx-menu'></i>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const btnIcon = document.querySelector('.menu-toggle-btn i');
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            if (sidebar.classList.contains('active')) {
+                btnIcon.classList.remove('bx-menu');
+                btnIcon.classList.add('bx-x');
+            } else {
+                btnIcon.classList.remove('bx-x');
+                btnIcon.classList.add('bx-menu');
+            }
+        }
+    </script>
+
+</body>
+</html>

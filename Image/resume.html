@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume - Benjamin Million</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- SHARED NEON THEME --- */
+    :root {
+      --bg-color: #050505;
+      --neon-cyan: #00f3ff;
+      --neon-pink: #bc13fe;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text-main: #fff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding-bottom: 100px;
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(188, 19, 254, 0.05) 0%, rgba(0, 0, 0, 0) 50%),
+        linear-gradient(0deg, rgba(0,0,0,1) 0%, #1a1a2e 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* CONTAINER & SECTIONS */
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      transition: width 0.3s ease;
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    /* --- PROFILE VIDEO STYLES --- */
+    .video-wrapper {
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 20px auto; /* Centered with bottom margin */
+      border-radius: 50%;
+      overflow: hidden; /* Ensures video stays circular */
+      
+      /* Neon Styling applied to wrapper */
+      border: 3px solid var(--neon-pink);
+      box-shadow: 0 0 20px var(--neon-pink);
+      background: #000; /* Fallback background */
+    }
+
+    .pfp-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures video fills circle without stretching */
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      font-size: 2.5em;
+      margin-bottom: 5px;
+      text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+    }
+
+    .subtitle {
+      color: #ddd;
+      font-size: 1.1em;
+      letter-spacing: 1px;
+    }
+
+    section {
+      background: rgba(0,0,0,0.3);
+      margin-bottom: 25px;
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      transition: transform 0.3s ease;
+    }
+
+    section:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-pink);
+      border-bottom: 1px solid var(--neon-cyan);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      display: inline-block;
+      width: 100%;
+    }
+
+    /* LISTS */
+    ul { list-style: none; }
+    
+    li {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      color: #ccc;
+    }
+
+    li strong { color: #fff; margin-right: 5px; }
+    
+    /* CONTACT LINKS */
+    a.contact-link {
+      color: var(--neon-cyan);
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    a.contact-link:hover { text-shadow: 0 0 5px var(--neon-cyan); text-decoration: underline; }
+
+    /* FOOTER */
+    .footer-link {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+      color: var(--neon-pink);
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9em;
+    }
+    .footer-link:hover { color: #fff; text-shadow: 0 0 10px var(--neon-pink); }
+
+    /* --- SIDEBAR NAVIGATION --- */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 260px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      border-left: 1px solid var(--neon-cyan);
+      box-shadow: -5px 0 20px rgba(0, 243, 255, 0.15);
+      z-index: 2000;
+      padding-top: 80px;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sidebar.active {
+      right: 0;
+    }
+
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1em;
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: 0.3s;
+    }
+
+    .sidebar a i {
+      font-size: 1.3em;
+      color: var(--neon-pink);
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      background: rgba(188, 19, 254, 0.1);
+      padding-left: 35px;
+      color: var(--neon-cyan);
+    }
+    
+    .sidebar a:hover i {
+      color: var(--neon-cyan);
+      transform: scale(1.2);
+    }
+
+    /* Toggle Button */
+    .menu-toggle-btn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      width: 60px;
+      height: 60px;
+      background: #000;
+      border: 2px solid var(--neon-pink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--neon-pink);
+      z-index: 2001;
+      transition: 0.3s;
+    }
+
+    .menu-toggle-btn:hover {
+      transform: scale(1.1) rotate(180deg);
+      background: rgba(188, 19, 254, 0.2);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 20px var(--neon-cyan);
+    }
+
+    .menu-toggle-btn i {
+      font-size: 28px;
+      color: #fff;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(2px);
+      z-index: 1999;
+      opacity: 0;
+      visibility: hidden;
+      transition: 0.3s;
+    }
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @media screen and (max-width: 768px) {
+      .container { width: 95%; margin: 20px auto; padding: 20px; }
+      h1 { font-size: 1.8em; }
+      
+      /* Scale down video wrapper on mobile if needed */
+      .video-wrapper { width: 120px; height: 120px; }
+      
+      .menu-toggle-btn { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+      .menu-toggle-btn i { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <div class="profile-header">
+      <!-- Replaced Image with Video Wrapper -->
+      <div class="video-wrapper">
+        <video class="pfp-video" autoplay muted loop playsinline>
+          <source src="vid.mp4" type="video/mp4">
+          <!-- Fallback image if video fails or not supported -->
+          <img src="https://placehold.co/150x150/1a1a2e/bc13fe?text=BM" alt="Benjamin Million" style="width:100%; height:100%; object-fit:cover;">
+        </video>
+      </div>
+
+      <h1>Benjamin Million</h1>
+      <p class="subtitle">College Student | Bachelor of Science in Information Technology</p>
+    </div>
+
+    <section class="contact">
+      <h2>Contact Info</h2>
+      <ul>
+        <li><i class='bx bx-phone' style="margin-right:10px; color:var(--neon-cyan)"></i> 09632480524</li>
+        <li><i class='bx bx-envelope' style="margin-right:10px; color:var(--neon-cyan)"></i> <a href="mailto:benjaminmillion000@gmail.com" class="contact-link">benjaminmillion000@gmail.com</a></li>
+        <li><i class='bx bx-map' style="margin-right:10px; color:var(--neon-cyan)"></i> San Antonio Valley 8, Sucat Parañaque City</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>About Me</h2>
+      <p style="color: #ddd; line-height: 1.6;">To pursue a challenging opportunity to gain more experience for personal growth and professional advancement while working at my best to make positive contributions.</p>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+        <li>⏳ Time management skills</li>
+        <li>💪 Working under pressure</li>
+        <li>⚡ Fast decision making</li>
+        <li>💻 Computer literate</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <ul>
+        <li>
+          <div style="width:100%">
+            <strong style="color:var(--neon-cyan)">Olivarez College</strong><br>
+            <span style="font-size:0.9em">Bachelor of Science in Information Technology</span>
+          </div>
+        </li>
+        <li>
+          <div style="width:100%">
+            <strong style="color:var(--neon-cyan)">KCM Academy</strong><br>
+            <span style="font-size:0.9em">Senior High School (2017–2019)</span>
+          </div>
+        </li>
+        <li>
+          <div style="width:100%">
+            <strong style="color:var(--neon-cyan)">Parañaque National High School</strong><br>
+            <span style="font-size:0.9em">High School (2014–2017)</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>References</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+        <div>
+          <strong style="color:var(--neon-pink)">Jonard Cornel</strong><br>
+          <span style="font-size:0.85em; color:#aaa">jonardcornel@gmail.com</span>
+        </div>
+        <div>
+          <strong style="color:var(--neon-pink)">Rizal Paterno</strong><br>
+          <span style="font-size:0.85em; color:#aaa">paternozral@gmail.com</span>
+        </div>
+        <div>
+          <strong style="color:var(--neon-pink)">Elvin Rlta</strong><br>
+          <span style="font-size:0.85em; color:#aaa">elvinrital@gmail.com</span>
+        </div>
+      </div>
+    </section>
+
+    <a href="home.html" class="footer-link"><i class='bx bx-arrow-back'></i> Back to Mainpage</a>
+
+  </div> <!-- End Container -->
+
+  <!-- SIDEBAR NAVIGATION & OVERLAY -->
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+  <div class="sidebar" id="sidebar">
+    <a href="home.html"><i class='bx bx-home'></i> Home</a>
+    <a href="lesson.html"><i class='bx bx-search'></i> Lesson</a>
+    <a href="Activity.html"><i class='bx bx-bell'></i> Activity Image</a>
+    <a href="Activity2.html"><i class='bx bx-heart'></i> Media</a>
+    <a href="midterm.html"><i class='bx bx-user'></i> Midterm</a>
+  </div>
+
+  <!-- TOGGLE BUTTON -->
+  <div class="menu-toggle-btn" onclick="toggleSidebar()">
+    <i class='bx bx-menu'></i>
+  </div>
+
+  <script>
+    // --- SIDEBAR LOGIC ---
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const btnIcon = document.querySelector('.menu-toggle-btn i');
+      
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+
+      if (sidebar.classList.contains('active')) {
+        btnIcon.classList.remove('bx-menu');
+        btnIcon.classList.add('bx-x');
+      } else {
+        btnIcon.classList.remove('bx-x');
+        btnIcon.classList.add('bx-menu');
+      }
+    }
+  </script>
+</body>
+</html>

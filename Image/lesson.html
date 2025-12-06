@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson - HTML Elements</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- SHARED NEON THEME --- */
+    :root {
+      --bg-color: #050505;
+      --neon-cyan: #00f3ff;
+      --neon-pink: #bc13fe;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text-main: #fff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding-bottom: 100px; /* Space for menu */
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(188, 19, 254, 0.05) 0%, rgba(0, 0, 0, 0) 50%),
+        linear-gradient(0deg, rgba(0,0,0,1) 0%, #1a1a2e 100%);
+      min-height: 100vh;
+      overflow-x: hidden; /* Prevent horizontal scroll on body */
+    }
+
+    /* CONTENT CONTAINER */
+    .container {
+      width: 90%; /* Responsive width */
+      max-width: 900px; /* Maximum width */
+      margin: 40px auto;
+      padding: 30px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      transition: width 0.3s ease; /* Smooth resize */
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Orbitron', sans-serif;
+      color: var(--neon-cyan);
+      margin: 20px 0 10px;
+      text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+      word-wrap: break-word; /* Prevent long headers from overflowing */
+    }
+
+    p { margin-bottom: 15px; color: #ddd; line-height: 1.6; }
+    hr { border: 0; height: 1px; background: var(--glass-border); margin: 30px 0; box-shadow: 0 0 5px var(--neon-pink); }
+
+    /* LISTS */
+    ul, ol { margin-left: 20px; margin-bottom: 20px; color: #ccc; }
+    li { margin-bottom: 5px; }
+
+    /* DEFINITION LIST */
+    dt { color: var(--neon-pink); font-weight: bold; margin-top: 10px; }
+    dd { margin-left: 20px; color: #aaa; }
+
+    /* IMAGES & FIGURES */
+    img { max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--glass-border); }
+    figure { margin: 10px; text-align: center; display: inline-block; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; max-width: 100%; }
+    figcaption { font-size: 0.8em; color: var(--neon-cyan); margin-top: 5px; }
+
+    .image-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin: 20px 0; }
+
+    /* TABLES - Responsive Wrapper */
+    .table-container {
+      overflow-x: auto; /* Allows table to scroll horizontally on small screens */
+      margin: 20px 0;
+      border: 1px solid var(--glass-border);
+      border-radius: 8px;
+    }
+    
+    table {
+      width: 100%;
+      min-width: 500px; /* Ensures table keeps shape even if container shrinks */
+      border-collapse: collapse;
+      color: #fff;
+    }
+    th, td { padding: 12px; border: 1px solid var(--glass-border); text-align: left; }
+    thead { background: rgba(0, 243, 255, 0.1); }
+    th { color: var(--neon-cyan); font-family: 'Orbitron', sans-serif; }
+    tfoot { background: rgba(0,0,0,0.5); }
+
+    /* FORMS */
+    .form-box {
+      background: rgba(0,0,0,0.4);
+      padding: 25px;
+      border-radius: 10px;
+      border: 1px solid var(--neon-pink);
+      margin-bottom: 30px;
+      box-shadow: 0 0 15px rgba(188, 19, 254, 0.1);
+      width: 100%;
+      overflow: hidden;
+    }
+
+    label { display: block; margin-top: 10px; color: var(--neon-cyan); font-size: 0.9em; }
+    
+    input[type="text"], 
+    input[type="password"], 
+    input[type="email"], 
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--glass-border);
+      color: #fff;
+      border-radius: 5px;
+    }
+
+    input[type="text"]:focus, 
+    input[type="password"]:focus, 
+    input[type="email"]:focus {
+      outline: none;
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 8px rgba(0, 243, 255, 0.3);
+    }
+
+    input[type="submit"] {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: transparent;
+      border: 1px solid var(--neon-cyan);
+      color: var(--neon-cyan);
+      font-family: 'Orbitron', sans-serif;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%; /* Full width on mobile preferred usually */
+      max-width: 150px;
+      display: inline-block;
+    }
+
+    input[type="submit"]:hover {
+      background: var(--neon-cyan);
+      color: #000;
+      box-shadow: 0 0 15px var(--neon-cyan);
+    }
+
+    .radio-group, .checkbox-group { margin: 10px 0; display: flex; flex-wrap: wrap; gap: 10px; }
+    .radio-group label, .checkbox-group label { display: inline-flex; align-items: center; margin-top: 0; color: #ccc; }
+    input[type="radio"], input[type="checkbox"] { margin-right: 5px; accent-color: var(--neon-pink); }
+
+    /* MEDIA */
+    .flex-center { display: flex; justify-content: center; margin: 30px 0; }
+    iframe { border: 1px solid var(--neon-pink) !important; border-radius: 10px; box-shadow: 0 0 15px rgba(188, 19, 254, 0.2); max-width: 100%; }
+
+    /* MODAL FOR ALERTS */
+    #custom-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(5px);
+      padding: 20px; /* Add padding for small screens */
+    }
+    .modal-content {
+      background: #111;
+      border: 2px solid var(--neon-cyan);
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+    }
+    .modal-content h3 { margin-top: 0; color: var(--neon-pink); }
+    .modal-content p { white-space: pre-line; text-align: left; background: #222; padding: 10px; border-radius: 5px; margin: 15px 0; font-family: monospace; word-break: break-all; }
+    .close-btn {
+      background: var(--neon-cyan);
+      color: #000;
+      border: none;
+      padding: 8px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    /* --- SIDEBAR NAVIGATION --- */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 260px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      border-left: 1px solid var(--neon-cyan);
+      box-shadow: -5px 0 20px rgba(0, 243, 255, 0.15);
+      z-index: 2000;
+      padding-top: 80px;
+      display: flex;
+      flex-direction: column;
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .sidebar.active { right: 0; }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1em;
+      padding: 15px 25px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: 0.3s;
+    }
+    .sidebar a i { font-size: 1.3em; color: var(--neon-pink); transition: 0.3s; }
+    .sidebar a:hover { background: rgba(188, 19, 254, 0.1); padding-left: 35px; color: var(--neon-cyan); }
+    .sidebar a:hover i { color: var(--neon-cyan); transform: scale(1.2); }
+
+    /* Toggle Button */
+    .menu-toggle-btn {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      width: 60px;
+      height: 60px;
+      background: #000;
+      border: 2px solid var(--neon-pink);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 15px var(--neon-pink);
+      z-index: 2001;
+      transition: 0.3s;
+    }
+    .menu-toggle-btn:hover { transform: scale(1.1) rotate(180deg); background: rgba(188, 19, 254, 0.2); border-color: var(--neon-cyan); box-shadow: 0 0 20px var(--neon-cyan); }
+    .menu-toggle-btn i { font-size: 28px; color: #fff; }
+
+    .overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5); backdrop-filter: blur(2px);
+      z-index: 1999; opacity: 0; visibility: hidden; transition: 0.3s;
+    }
+    .overlay.active { opacity: 1; visibility: visible; }
+
+    /* === RESPONSIVE MEDIA QUERIES === */
+    @media screen and (max-width: 768px) {
+      .container {
+        width: 95%; 
+        margin: 20px auto;
+        padding: 20px;
+      }
+      
+      input[type="submit"] {
+        width: 100%;
+        max-width: none;
+      }
+      
+      .menu-toggle-btn { bottom: 20px; right: 20px; width: 50px; height: 50px; }
+      .menu-toggle-btn i { font-size: 24px; }
+    }
+
+    @media screen and (max-width: 480px) {
+      h1 { font-size: 1.5rem; }
+      h2 { font-size: 1.3rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- No Header - Sidebar is used instead -->
+
+  <div class="container">
+    <p>Hello World!</p>
+    
+    <h1>My First Page</h1>
+    <p style="border-left: 3px solid var(--neon-pink); padding-left: 10px;">
+      <strong style="color:var(--neon-pink)">CS211</strong><br>
+      I'm Jhayr Million<br>CS211 Application Development and Emerging Technologies
+    </p>
+
+    <hr>
+
+    <h1>Headers</h1>
+    <h1>Header 1</h1>
+    <h2>Header 2</h2>
+    <h3>Header 3</h3>
+    <h4>Header 4</h4>
+    <h5>Header 5</h5>
+    <h6>Header 6</h6>
+
+    <hr>
+
+    <p><b>Bold</b> <i>Italic</i></p>
+    <p><sub>Subscript</sub><sup>Superscript</sup></p>
+    <p>A&nbsp;&nbsp; lion.</p>
+
+    <hr>
+    
+    <p><strong>Lorem ipsum dolor sit amet...</strong></p>
+    <p><em>Lorem ipsum dolor sit amet...</em></p>
+    <blockquote>Lorem ipsum dolor sit amet...</blockquote>
+    <p><q>Lorem ipsum dolor sit...</q></p>
+
+    <hr>
+
+    <h3>Ordered List</h3>
+    <ol type="I">
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+      <li>Item 4</li>
+      <li>Item 5</li>
+    </ol>
+
+    <h3>Unordered List</h3>
+    <ul>
+      <li>Item 1</li>
+      <li>Item 2</li>
+      <li>Item 3</li>
+      <li>Item 4</li>
+      <li>Item 5</li>
+    </ul>
+
+    <hr>
+
+    <dl>
+      <dt>HTML</dt><dd>Structure</dd>
+      <dt>CSS</dt><dd>Design</dd>
+      <dt>JavaScript</dt><dd>Functionality</dd>
+    </dl>
+
+    <ul>
+      <li>CARS
+        <ul>
+          <li>TOYOTA</li>
+          <li>HONDA</li>
+          <li>SUBARU</li>
+        </ul>
+      </li>
+    </ul>
+
+    <hr>
+    
+    <h1>Images (Placeholders)</h1>
+    <div class="image-row">
+       <figure>
+         <img src="https://placehold.co/200x200/222/00f3ff?text=Person+1" alt="Placeholder">
+         <figcaption>My Idol</figcaption>
+       </figure>
+       <figure>
+         <img src="https://placehold.co/200x200/222/bc13fe?text=Person+2" alt="Placeholder">
+         <figcaption>Idol 2</figcaption>
+       </figure>
+    </div>
+
+    <div class="image-row">
+      <figure> 
+        <img src="https://placehold.co/150x150/000/fff?text=Gif+1" alt="Placeholder">
+        <figcaption>Caption 1</figcaption>
+      </figure>
+      <figure> 
+        <img src="https://placehold.co/150x150/000/fff?text=Gif+2" alt="Placeholder">
+        <figcaption>Caption 2</figcaption>
+      </figure>
+    </div>
+
+    <hr>
+
+    <h1>TABLES</h1>
+    <!-- WRAPPER FOR SCROLLABLE TABLE -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>User 1</td>
+            <td>18</td>
+            <td rowspan="2" style="background: rgba(188, 19, 254, 0.2);">Olivarez</td>
+          </tr>
+          <tr>
+            <td>User 2</td>
+            <td>18</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="3" align="center">End of my table</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <!-- LOGIN FORM -->
+    <div class="form-box">
+      <h1>LOGIN FORM</h1>
+      <form onsubmit="event.preventDefault(); login();">
+        <label for="username">Username (Try: Jhayr)</label>
+        <input type="text" id="username" placeholder="Username">
+        
+        <label for="password">Password (Try: 123)</label>
+        <input type="password" id="password" placeholder="Password">
+        
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+    <!-- REGISTRATION FORM -->
+    <div class="form-box">
+      <h1>Registration</h1>
+      <form onsubmit="event.preventDefault(); reg();">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" placeholder="Fullname">
+        
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Email">
+        
+        <label>Gender</label>
+        <div class="radio-group">
+          <label><input type="radio" name="gender" value="Male" checked> Male</label>
+          <label><input type="radio" name="gender" value="Female"> Female</label>
+        </div>
+        
+        <label>Genre</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="genre" value="Kpop" checked> Kpop</label>
+          <label><input type="checkbox" name="genre" value="Jazz" checked> Jazz</label>
+          <label><input type="checkbox" name="genre" value="Rock" checked> Rock</label>
+        </div>
+        
+        <label>Favorite Music Service</label>
+        <select name="services" id="services">
+          <option value="Itunes">Itunes</option>
+          <option value="Spotify">Spotify</option>
+          <option value="Youtube">Youtube</option>
+        </select>
+        
+        <input type="submit" value="Submit">
+      </form>
+    </div>
+
+    <!-- MAP -->
+    <div class="flex-center">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1577.6304251092374!2d120.99314520284476!3d14.530080471469802!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c90028ca9c59%3A0x9148f5a993c9d99f!2sHotel%20Sogo%20-%20Baclaran%20Para%C3%B1aque%20City%20NCR!5e0!3m2!1sen!2sph!4v1756549475057!5m2!1sen!2sph"
+        width="100%" height="400" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+    <hr>
+    
+    <p style="text-align:center; font-size:0.8em; opacity:0.7;">
+      &copy; 2025 Jhayr Million
+      <br>
+      <a href="#top" style="color:var(--neon-cyan)">Back to Top</a>
+    </p>
+
+  </div> <!-- End Container -->
+
+  <!-- SIDEBAR NAVIGATION & OVERLAY -->
+  <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+  <div class="sidebar" id="sidebar">
+    <a href="home.html"><i class='bx bx-home'></i> Home</a>
+    <a href="resume.html"><i class='bx bx-bell'></i> Resume</a>
+    <a href="Activity.html"><i class='bx bx-bell'></i> Activity Image</a>
+    <a href="Activity2.html"><i class='bx bx-heart'></i> Media</a>
+    <a href="midterm.html"><i class='bx bx-user'></i> Midterm</a>
+  </div>
+
+  <!-- TOGGLE BUTTON -->
+  <div class="menu-toggle-btn" onclick="toggleSidebar()">
+    <i class='bx bx-menu'></i>
+  </div>
+
+  <!-- CUSTOM MODAL (Replaces Alert) -->
+  <div id="custom-modal">
+    <div class="modal-content">
+      <h3 id="modal-title">Notification</h3>
+      <p id="modal-msg"></p>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // --- SIDEBAR LOGIC ---
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const btnIcon = document.querySelector('.menu-toggle-btn i');
+      
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+
+      if (sidebar.classList.contains('active')) {
+        btnIcon.classList.remove('bx-menu');
+        btnIcon.classList.add('bx-x');
+      } else {
+        btnIcon.classList.remove('bx-x');
+        btnIcon.classList.add('bx-menu');
+      }
+    }
+
+    // --- MODAL LOGIC ---
+    function showModal(title, msg) {
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-msg').innerText = msg;
+      document.getElementById('custom-modal').style.display = 'flex';
+    }
+    
+    function closeModal() {
+      document.getElementById('custom-modal').style.display = 'none';
+    }
+
+    // --- FORM LOGIC ---
+    function login() {
+      var username = document.getElementById("username").value;
+      var password = document.getElementById("password").value;
+
+      if (username === "Jhayr" && password === "123") {
+        showModal("Success!", "Username: " + username + "\nPassword: " + password);
+      } else {
+        showModal("Error", "Invalid Password\n(Try: 123)");
+      }
+    }
+
+    function reg() {
+      var fullname = document.getElementById('fullname').value;
+      var email = document.getElementById('email').value;
+      var gender = document.querySelector('input[name="gender"]:checked').value;
+      var genre = document.querySelectorAll('input[name="genre"]:checked');
+      const valuegenre = Array.from(genre).map(checkbox => checkbox.value);
+      var services = document.querySelector('select[name="services"]').value;
+
+      if (valuegenre.length > 0) {
+        const genrecheck = valuegenre.join(', ');
+        showModal("Registration Details", 
+          "Fullname: " + fullname + 
+          "\nEmail: " + email + 
+          "\nGender: " + gender + 
+          "\nGenre: " + genrecheck + 
+          "\nService: " + services
+        );
+      } else {
+        showModal("Missing Info", "Please select at least one genre.");
+      }
+    }
+  </script>
+</body>
+</html>

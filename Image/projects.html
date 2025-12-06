@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benjamin Million - Professional Calling Card</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Shared Neon Theme (Rest of styles remain the same) --- */
+        :root {
+            --bg-color: #050505;
+            --neon-cyan: #00f3ff;
+            --neon-pink: #bc13fe;
+            --text-main: #fff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            perspective: 1000px;
+        }
+
+        /* --- CARD CONTAINER & FLIP MECHANISM --- */
+        .card-container {
+            width: 350px;
+            height: 200px;
+            position: relative;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+        
+        .card-container:hover {
+            transform: rotateY(180deg);
+        }
+
+        .calling-card {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            background: rgba(0, 0, 0, 0.85);
+            border-radius: 12px;
+            padding: 25px;
+            color: var(--text-main);
+            box-shadow: 0 0 30px rgba(188, 19, 254, 0.4);
+            border: 2px solid var(--neon-pink);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* --- FRONT SIDE STYLES (Same as before) --- */
+        .card-front {
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .pfp-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 3px solid var(--neon-cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: var(--neon-cyan);
+            overflow: hidden; 
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        .pfp-placeholder img {
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
+        }
+
+        .info-block .name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5em;
+            color: var(--neon-cyan);
+            margin: 0;
+            line-height: 1.1;
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.8);
+        }
+
+        .info-block .title {
+            font-size: 0.8em;
+            color: #ddd;
+            margin: 0 0 10px 0;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 5px;
+        }
+
+        .info-block .contact-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-block .contact-details li {
+            display: flex;
+            align-items: center;
+            font-size: 0.8em;
+            margin-bottom: 4px;
+        }
+
+        .info-block .contact-details i {
+            font-size: 1em;
+            margin-right: 8px;
+            color: var(--neon-pink);
+        }
+        
+        .info-block .contact-details a {
+            color: var(--neon-cyan);
+            text-decoration: none;
+        }
+
+        /* --- BACK SIDE STYLES --- */
+        .card-back {
+            transform: rotateY(180deg);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .card-back .tagline {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1em;
+            color: var(--neon-pink);
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--neon-pink);
+            padding-bottom: 5px;
+            width: 100%;
+        }
+
+        .card-back .skills-summary {
+            font-size: 0.8em;
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            flex-grow: 1; 
+            display: flex;
+            align-items: center; 
+        }
+        
+        .card-back .scan-link-block {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .card-back .scan-code {
+            width: 90%; /* Wider for barcode look */
+            height: 40px;
+            margin-bottom: 5px;
+        }
+
+        .card-back .scan-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill; /* Ensure barcode fills the space horizontally */
+            border: 1px solid #fff;
+            background: #fff;
+        }
+        
+        .flip-indicator {
+            position: absolute;
+            bottom: 5px;
+            right: 10px;
+            font-size: 0.6em;
+            color: var(--neon-pink);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="card-container">
+        
+        <div class="calling-card card-front">
+            <div class="pfp-placeholder">
+                <img src="cute.jpg" alt="Benjamin Million PFP">
+            </div>
+            
+            <div class="info-block">
+                <h1 class="name">BENJAMIN MILLION</h1>
+                <p class="title">Information Technology Student</p>
+
+                <ul class="contact-details">
+                    <li><i class='bx bxs-phone-call'></i> 0963 248 0524</li>
+                    <li><i class='bx bxs-envelope'></i> <a href="mailto:benjaminmillion000@gmail.com">benjaminmillion000@gmail.com</a></li>
+                    <li><i class='bx bxs-map'></i> Parañaque City, PH</li>
+                </ul>
+            </div>
+             <span class="flip-indicator">HOVER TO FLIP >></span>
+        </div>
+
+        <div class="calling-card card-back">
+            <div class="tagline">
+                <i class='bx bx-code-alt'></i> DRIVEN BY DIGITAL SOLUTIONS
+            </div>
+            
+            <div class="skills-summary">
+                Seeking opportunities in **Networking, Systems Analysis, or Software Development**. Core strengths include **Time Management**, **Fast Decision-Making**, and **Adapting under pressure**. Ready to apply foundational IT knowledge.
+            </div>
+            
+            <a href="resume.html" class="scan-link-block">
+                <div class="scan-code">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAAoCAYAAAC27lIBAAAACXBIWXMAAA7DAAAOwwHHje4GAAAAYElEQVR4nO3BMQEAAADCoPVPbQwPoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADg1c4l/wAB2hRj9AAAAABJRU5ErkJggg==" alt="Barcode Scan for Resume">
+                </div>
+                <strong style="color:var(--neon-cyan); font-size: 0.8em; margin-top: 5px;">SCAN TO VIEW RESUME</strong>
+            </a>
+        </div>
+
+    </div>
+
+</body>
+</html>

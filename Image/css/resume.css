@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Fugaz+One&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Londrina+Shadow&family=Rampart+One&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Zalando Sans Expanded", sans-serif;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-image: url("https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1600&q=80");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3));
+  z-index: -1;
+}
+
+
+header {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: fadeDown 1s ease forwards;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+  animation: rotateGlow 12s linear infinite;
+}
+
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+header video {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 5px solid rgba(255,255,255,0.8);
+  box-shadow: 0 0 25px rgba(255,255,255,0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+header video:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(255,255,255,0.8);
+}
+
+header h1 {
+  margin-top: 15px;
+  font-size: 2.6em;
+  font-family: "Rampart One", cursive;
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+header p {
+  margin-top: 8px;
+  font-size: 1.2em;
+  opacity: 0.9;
+  font-family: "Libre Baskerville", serif;
+}
+.container {
+  max-width: 1000px;
+  margin: 50px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 35% 65%;
+  gap: 30px;
+}
+
+section {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  transition: transform 0.5s ease, box-shadow 0.5s ease, background 0.5s ease;
+  opacity: 0;
+  animation: fadeUp 0.8s forwards;
+  transform-origin: center;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+section:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #e0f2fe, #dbeafe);
+  box-shadow: 0 15px 35px rgba(59,130,246,0.25), 0 0 30px rgba(59,130,246,0.2);
+}
+
+section h2 {
+  margin-bottom: 15px;
+  color: #1e3a8a;
+  font-size: 1.6em;
+  position: relative;
+  display: inline-block;
+  font-family: "Fugaz One", sans-serif;
+}
+
+section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50%;
+  height: 3px;
+  background: linear-gradient(to right, #3b82f6, #1e3a8a);
+  border-radius: 3px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  font-family: "Zalando Sans Expanded", sans-serif;
+}
+
+ul li {
+  background: #f0f9ff;
+  margin: 8px 0;
+  padding: 10px 15px;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+ul li:hover {
+  background: #dbeafe;
+}
+
+a {
+  text-decoration: none;
+  color: #2563eb;
+  font-family: "Libre Baskerville", serif;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.contact p {
+  margin: 8px 0;
+  font-size: 1.05em;
+  font-family: "Zalando Sans Expanded", sans-serif;
+}
+
+.contact, .about {
+  grid-column: span 2;
+}
+
+.References {
+  width: 1000px;
+  height: 200px;
+}
+
+footer {
+  
+  text-align: center;
+  border-radius: 20%;
+  border: black;
+  margin-top: 40px;
+  padding: 20px 0;
+  font-family: "Libre Baskerville", serif;
+}
+
+.back-home {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+
+.back-home:hover {
+  color: #1e3a8a;
+  transform: scale(1.1);
+}
+@keyframes fadeUp {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeDown {
+  0% { transform: translateY(-30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+section:nth-child(1) { animation-delay: 0.2s; }
+section:nth-child(2) { animation-delay: 0.4s; }
+section:nth-child(3) { animation-delay: 0.6s; }
+section:nth-child(4) { animation-delay: 0.8s; }
+section:nth-child(5) { animation-delay: 1s; }
+
+@media (max-width: 800px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+footer {
+  position: relative;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+  z-index: 1000;
+}
+
+.back-button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #1e3a8a; 
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background-color: #6086da;
+  transform: scale(1.05);
+}
+.parallax {
+  background-image: url("https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1600&q=80");
+  min-height: 400px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  filter: brightness(100%);
+}
